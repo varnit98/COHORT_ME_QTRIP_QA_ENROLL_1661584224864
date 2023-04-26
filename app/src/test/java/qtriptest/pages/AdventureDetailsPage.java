@@ -1,10 +1,12 @@
 
 package qtriptest.pages;
 
+import qtriptest.SeleniumWrapper;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+import org.testng.Assert;
 import org.openqa.selenium.support.FindBy;
 
 public class AdventureDetailsPage {
@@ -39,7 +41,9 @@ public class AdventureDetailsPage {
         dateTextBox.sendKeys(date);
         //Thread.sleep(2000);
         personCountTextBox.sendKeys(String.valueOf(personCount));
-        reserveButton.click();
+        //reserveButton.click();
+        boolean status = SeleniumWrapper.click(reserveButton, this.driver);
+        Assert.assertTrue(status);
     }
 
     public boolean isBookingSuccessful()throws InterruptedException{

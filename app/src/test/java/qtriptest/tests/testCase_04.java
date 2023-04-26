@@ -2,6 +2,7 @@ package qtriptest.tests;
 
 import qtriptest.DP;
 import qtriptest.DriverSingleton;
+import qtriptest.ReportSingleton;
 import qtriptest.pages.AdventureDetailsPage;
 import qtriptest.pages.AdventurePage;
 import qtriptest.pages.HomePage;
@@ -10,6 +11,7 @@ import qtriptest.pages.RegisterPage;
 import java.net.MalformedURLException;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
@@ -23,6 +25,8 @@ public class testCase_04 {
         driver = sbc1.getDriver();
         System.out.println("Create Browser");
         driver.manage().window().maximize();
+        ReportSingleton rs = ReportSingleton.getInstanceOfSingletonReport();
+        rs.createTest("TestCase03");
     }
 
     @Test(dataProvider = "data-provider", dataProviderClass = DP.class,
@@ -80,6 +84,14 @@ public class testCase_04 {
 
         //     }
         // }
+    }
+
+    @AfterSuite
+    public static void quitDriver(){
+        System.out.println("quit()");
+        ReportSingleton rs = ReportSingleton.getInstanceOfSingletonReport();
+        rs.flushReport();
+        driver.quit();
     }
 
 }

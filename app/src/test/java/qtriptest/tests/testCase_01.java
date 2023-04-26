@@ -2,7 +2,7 @@ package qtriptest.tests;
 
 import qtriptest.DP;
 import qtriptest.DriverSingleton;
-import qtriptest.ExcelUtility;
+import qtriptest.ReportSingleton;
 import qtriptest.pages.HomePage;
 import qtriptest.pages.LoginPage;
 import qtriptest.pages.RegisterPage;
@@ -29,6 +29,8 @@ public class testCase_01 {
         driver = sbc1.getDriver();
         System.out.println("Create Browser");
         driver.manage().window().maximize();
+        ReportSingleton rs = ReportSingleton.getInstanceOfSingletonReport();
+        rs.createTest("TestCase01");
     }
 
     @Test(dataProvider = "data-provider", dataProviderClass = DP.class, description = "Verify user registration - login - logout", priority = 1, groups = {"Login Flow"})
@@ -59,7 +61,10 @@ public class testCase_01 {
     @AfterSuite
     public static void quitDriver(){
         System.out.println("quit()");
+        ReportSingleton rs = ReportSingleton.getInstanceOfSingletonReport();
+        rs.flushReport();
         driver.quit();
+        
     }
 }
 

@@ -2,6 +2,7 @@ package qtriptest.tests;
 
 import qtriptest.DP;
 import qtriptest.DriverSingleton;
+import qtriptest.ReportSingleton;
 import qtriptest.pages.AdventureDetailsPage;
 import qtriptest.pages.AdventurePage;
 import qtriptest.pages.HistoryPage;
@@ -27,6 +28,8 @@ public class testCase_03 {
         driver = sbc1.getDriver();
         System.out.println("Create Browser");
         driver.manage().window().maximize();
+        ReportSingleton rs = ReportSingleton.getInstanceOfSingletonReport();
+        rs.createTest("TestCase03");
     }
 
     @Test(dataProvider = "data-provider", dataProviderClass = DP.class, description = "Verify that adventure booking and cancellation works fine", priority = 3, groups = {"Booking and Cancellation Flow"})
@@ -82,6 +85,8 @@ public class testCase_03 {
     @AfterSuite
     public static void quitDriver(){
         System.out.println("quit()");
+        ReportSingleton rs = ReportSingleton.getInstanceOfSingletonReport();
+        rs.flushReport();
         driver.quit();
     }
 

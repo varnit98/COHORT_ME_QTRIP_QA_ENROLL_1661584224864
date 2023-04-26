@@ -1,5 +1,6 @@
 package qtriptest.pages;
 
+import qtriptest.SeleniumWrapper;
 import java.util.UUID;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -49,11 +50,13 @@ public class RegisterPage {
             usernameText.sendKeys(test_data_username);
             passwordText.sendKeys(password);
             confirmPasswordText.sendKeys(password);
-            registerButton.click();
+            //registerButton.click();
+            boolean status = SeleniumWrapper.click(registerButton, this.driver);
+            Assert.assertTrue(status);
             Thread.sleep(2000);
             this.lastGeneratedUsername = test_data_username;
 
-            boolean status = this.driver.getCurrentUrl().contains("/login");
+            status = this.driver.getCurrentUrl().contains("/login");
             Assert.assertTrue(status, "Registration successful or not");
     }
 }

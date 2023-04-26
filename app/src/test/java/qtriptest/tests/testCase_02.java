@@ -2,6 +2,7 @@ package qtriptest.tests;
 
 import qtriptest.DP;
 import qtriptest.DriverSingleton;
+import qtriptest.ReportSingleton;
 import qtriptest.pages.AdventurePage;
 import qtriptest.pages.HomePage;
 import java.net.MalformedURLException;
@@ -21,6 +22,8 @@ public class testCase_02 {
         driver = sbc1.getDriver();
         System.out.println("Create Browser");
         driver.manage().window().maximize();
+        ReportSingleton rs = ReportSingleton.getInstanceOfSingletonReport();
+        rs.createTest("TestCase02");
     }
     
     @Test(dataProvider = "data-provider", dataProviderClass = DP.class, description = "Verify that Search and filters work fine", priority = 2, groups = {"Search and Filter flow"})
@@ -50,6 +53,8 @@ public class testCase_02 {
     @AfterSuite
     public static void quitDriver(){
         System.out.println("quit()");
+        ReportSingleton rs = ReportSingleton.getInstanceOfSingletonReport();
+        rs.flushReport();
         driver.quit();
     }
 

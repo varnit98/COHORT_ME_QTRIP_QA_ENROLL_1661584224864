@@ -1,6 +1,7 @@
 
 package qtriptest.pages;
 
+import qtriptest.SeleniumWrapper;
 import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.WebElement;
@@ -28,7 +29,9 @@ public class HistoryPage {
     List<WebElement> cancelButton;
 
     public void clickHereButton() throws InterruptedException{
-        historyLinkButton.click();
+        //historyLinkButton.click();
+        boolean status = SeleniumWrapper.click(historyLinkButton, this.driver);
+        Assert.assertTrue(status);
         Thread.sleep(2000);
         Assert.assertTrue(this.driver.getCurrentUrl().contains("reservations"), "Redirected to history page");
     }
@@ -44,7 +47,9 @@ public class HistoryPage {
     public void cancelReservation(String transacationId){
         for(int i=0; i<transactionIdElement.size(); i++){
             if(transactionIdElement.get(i).getText().equals(transacationId)){
-                cancelButton.get(i).click();
+                //cancelButton.get(i).click();
+                boolean status = SeleniumWrapper.click(cancelButton.get(i), this.driver);
+                Assert.assertTrue(status);
             }
         }
     }

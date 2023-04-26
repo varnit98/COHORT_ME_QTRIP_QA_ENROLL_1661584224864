@@ -1,5 +1,6 @@
 package qtriptest.pages;
 
+import qtriptest.SeleniumWrapper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -9,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 public class HomePage {
     RemoteWebDriver driver;
@@ -39,7 +41,9 @@ public class HomePage {
     public void clickRegister() throws InterruptedException{
         
         Thread.sleep(5000);
-        registerButton.click();
+        //registerButton.click();
+        boolean status = SeleniumWrapper.click(registerButton, this.driver);
+        Assert.assertTrue(status);
         Thread.sleep(5000);
         
     }
@@ -54,7 +58,9 @@ public class HomePage {
     }
 
     public void logOutUser() throws InterruptedException{
-        logoutButton.click();
+        //logoutButton.click();
+        boolean status = SeleniumWrapper.click(logoutButton, this.driver);
+        Assert.assertTrue(status);
         Thread.sleep(2000);
     }
 

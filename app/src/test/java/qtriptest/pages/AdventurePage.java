@@ -1,6 +1,8 @@
 package qtriptest.pages;
 
+import qtriptest.SeleniumWrapper;
 import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -8,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 public class AdventurePage {
     RemoteWebDriver driver;
@@ -48,14 +51,20 @@ public class AdventurePage {
     }
 
     public void removeFilter(){
-        clearButton.get(0).click();;
-        clearButton.get(1).click();
+        // clearButton.get(0).click();;
+        // clearButton.get(1).click();
+        boolean status = SeleniumWrapper.click(clearButton.get(0), this.driver);
+        Assert.assertTrue(status);
+        status = SeleniumWrapper.click(clearButton.get(1), this.driver);
+        Assert.assertTrue(status);
     }
 
     public void selectAdventure(String adventureName) throws InterruptedException{
         for(int i=0; i<allAdventures.size(); i++){
             if(allAdventures.get(i).getText().contains(adventureName)){
-                allAdventures.get(i).click();
+                //allAdventures.get(i).click();
+                boolean status = SeleniumWrapper.click(allAdventures.get(i), this.driver);
+                Assert.assertTrue(status);
                 break;
             }
         }

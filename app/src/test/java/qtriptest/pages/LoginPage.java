@@ -1,10 +1,12 @@
 package qtriptest.pages;
 
+import qtriptest.SeleniumWrapper;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+import org.testng.Assert;
 
 public class LoginPage {
 
@@ -34,7 +36,9 @@ public class LoginPage {
         passwordText.clear();
         usernameText.sendKeys(username);
         passwordText.sendKeys(password);
-        loginButton.click();
+        //loginButton.click();
+        boolean status = SeleniumWrapper.click(loginButton, this.driver);
+        Assert.assertTrue(status);
         Thread.sleep(2000);
     }
 }
